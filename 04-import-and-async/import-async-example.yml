@@ -1,0 +1,18 @@
+- hosts: demo_server
+
+  tasks:
+    - name: Check Long Script is Ready
+      include_tasks: long-script/get-long-script-ready.yml
+
+    - name: Excecute Long Script
+      shell: "~/mydemo/longtask.sh 15"
+      async: 120
+      poll: 0
+      register: job
+    
+    - name: Check Job Status
+      async_status:
+        jid: "{{ job.ansible_job_id }}"
+      register: job_result
+      until: job_result.finished
+      retries: 10

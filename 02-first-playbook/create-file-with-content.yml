@@ -1,0 +1,16 @@
+- hosts: demo_server
+
+  tasks:
+    - name: Create a new directory 
+      file:
+        path: "~/mydemo"
+        state: directory
+    
+    - name: Create a file with content in mydemo dir
+      copy:
+        dest: "~/mydemo/config"
+        content: |
+          var1=foo
+          var2=bar
+          This is host: {{ inventory_hostname }}
+          

@@ -1,0 +1,19 @@
+- hosts: demo_server
+
+  tasks:
+    - name: Get content from endpoint and store it in VAR
+      uri:
+        url: https://artii.herokuapp.com/make?text={{ MY_CUSTOM_VAR | default('ThisiIDeafult') }}
+        method: GET
+        return_content: yes
+      register: out
+
+    - name: Print all available facts
+      ansible.builtin.debug:
+        var: ansible_facts
+
+    - name: Create a file with content in mydemo dir
+      copy:
+        dest: "~/mydemo/config"
+        content: "{{ out.content }}\n {{ansible_facts.hostname}} \n"
+          

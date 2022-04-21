@@ -1,0 +1,9 @@
+- name: Copy Long Script
+  get_url:
+    url: http://path/to/long/taks/longtask.sh
+    dest: ~/mydemo/
+
+- name: Change File permissions
+  file:
+    dest: ~/mydemo/longtask.sh
+    mode: 0770

@@ -1,0 +1,7 @@
+[demo_server]
+10.211.200.213
+10.211.200.214
+10.211.200.215
+[demo_server:vars]
+ansible_user=ubuntu
+ansible_ssh_pass=ubuntu
